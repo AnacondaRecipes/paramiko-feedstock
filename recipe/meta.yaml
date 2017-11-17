@@ -1,8 +1,8 @@
 {% set name = "paramiko" %}
-{% set version = "2.3.1" %}
+{% set version = "2.4.0" %}
 {% set bundle = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "fa6b4f5c9d88f27c60fd9578146ff24e99d4b9f63391ff1343305bfd766c4660" %}
+{% set hash_value = "486f637f0a33a4792e0e567be37426c287efaa8c4c4a45e3216f9ce7fd70b1fc" %}
 {% set build = 0 %}
 
 package:
@@ -12,7 +12,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.{{ bundle }}
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ bundle }}
-  {{ hash_type }}: {{ hash_val }}
+  {{ hash_type }}: {{ hash_value }}
 
 build:
   noarch: python
@@ -41,6 +41,11 @@ about:
   license_file: LICENSE
   license: LGPL 2.1
   summary: 'SSH2 protocol library'
+  description: |
+      This is a library for making SSH2 connections (client or server).
+      Emphasis is on using SSH2 as an alternative to SSL for making secure
+      connections between python scripts. All major ciphers and hash methods
+      are supported. SFTP client and server mode are both supported too.
   license_family: LGPL
   dev_url: https://github.com/paramiko/paramiko/
   doc_url: http://docs.paramiko.org/
