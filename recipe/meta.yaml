@@ -15,7 +15,6 @@ source:
   {{ hash_type }}: {{ hash_value }}
 
 build:
-  noarch: python
   number: {{ build }}
   script: python setup.py install --single-version-externally-managed --record=record.txt
 
