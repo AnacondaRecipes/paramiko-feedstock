@@ -1,7 +1,7 @@
 {%set name = "paramiko" %}
-{%set version = "1.18.1" %}
+{%set version = "1.18.4" %}
 {%set hash_type = "sha256" %}
-{%set hash_val = "a17f693935ece50fdc647258d7e1d02f1499e534e9887c29cb02333695e907d8" %}
+{%set hash_val = "c5f9e14d44bd4940244a7dccde6019d97472122f07585e1081fc4c7327ea2765" %}
 {%set build_num = "0" %}
 
 package:
