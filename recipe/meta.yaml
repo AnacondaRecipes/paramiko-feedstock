@@ -1,21 +1,21 @@
 {% set name = "paramiko" %}
-{% set version = "2.6.0" %}
+{% set version = "2.7.1" %}
 {% set bundle = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "f4b2edfa0d226b70bd4ca31ea7e389325990283da23465d572ed1f70a7583041" %}
+{% set hash_val = "920492895db8013f6cc0179293147f830b8c7b21fdfc839b6bad760c27459d9f" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ bundle }}
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ bundle }}
   {{ hash_type }}: {{ hash_val }}
 
 build:
   number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
+  noarch: python
 
 requirements:
   host:
