@@ -1,8 +1,8 @@
 {% set name = "paramiko" %}
-{% set version = "2.7.1" %}
+{% set version = "2.7.2" %}
 {% set bundle = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "920492895db8013f6cc0179293147f830b8c7b21fdfc839b6bad760c27459d9f" %}
+{% set hash_val = "7f36f4ba2c0d81d219f4595e35f70d56cc94f9ac40a6acdf51d6ca210ce65035" %}
 
 package:
   name: {{ name }}
@@ -14,7 +14,7 @@ source:
   {{ hash_type }}: {{ hash_val }}
 
 build:
-  number: 1
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
   noarch: python
 
