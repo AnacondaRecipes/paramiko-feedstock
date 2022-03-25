@@ -1,8 +1,8 @@
 {% set name = "paramiko" %}
-{% set version = "2.8.1" %}
+{% set version = "2.10.3" %}
 {% set bundle = "tar.gz" %}
 {% set hash_type = "sha256" %}
-{% set hash_val = "85b1245054e5d7592b9088cc6d08da22445417912d3a3e48138675c7a8616438" %}
+{% set hash_val = "ddb1977853aef82804b35d72a0e597b244fa326c404c350bd00c5b01dbfee71a" %}
 
 package:
   name: {{ name }}
