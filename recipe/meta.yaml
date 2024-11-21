@@ -28,6 +28,11 @@ requirements:
     - bcrypt >=3.2
     - cryptography >=3.3
     - pynacl >=1.5
+  run_constrained:
+    - pyasn1 >=0.1.7
+    - gssapi >=1.4.1   # [not win]
+    - pywin32 >=218  # [win]
+    - invoke >=2.0
 
 test:
   imports:
