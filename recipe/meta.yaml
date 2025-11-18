@@ -1,33 +1,33 @@
 {% set name = "paramiko" %}
-{% set version = "3.5.0" %}
+{% set version = "4.0.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ad11e540da4f55cedda52931f1a3f812a8238a7af7f62a60de538cd80bb28124
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 6a25f07b380cc9c9a88d2b920ad37167ac4667f8d9886ccebd8f90f654b5d69f
 
 build:
-  skip: True  # [py<36]
-  number: 1
+  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
+    - setuptools >=77
   run:
     - python
     - bcrypt >=3.2
     - cryptography >=3.3
     - pynacl >=1.5
+    - invoke >=2.0
   run_constrained:
     - pyasn1 >=0.1.7
-    - gssapi >=1.4.1   # [not win]
+    - gssapi >=1.4.1  # [not win]
     - pywin32 >=218  # [win]
     - invoke >=2.0
 
