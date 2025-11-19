@@ -23,32 +23,37 @@ requirements:
     - python
     - bcrypt >=3.2
     - cryptography >=3.3
-    - pynacl >=1.5
     - invoke >=2.0
+    - pynacl >=1.5
   run_constrained:
     - pyasn1 >=0.1.7
     - gssapi >=1.4.1  # [not win]
     - pywin32 >=218  # [win]
-    - invoke >=2.0
 
 test:
+  source_files:
+    - tests
   imports:
     - paramiko
   requires:
     - pip
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    # ImportError while loading conftest
+    # E   ModuleNotFoundError: No module named 'icecream'
+    # - pytest -v tests
 
 about:
-  home: https://www.paramiko.org/
+  home: https://www.paramiko.org
   license_file: LICENSE
   license: LGPL-2.1-or-later
   summary: SSH2 protocol library
   description: |
     A Python implementation of SSHv2
   license_family: LGPL
-  dev_url: https://github.com/paramiko/paramiko/
-  doc_url: https://docs.paramiko.org/
+  dev_url: https://github.com/paramiko/paramiko
+  doc_url: https://docs.paramiko.org
 
 extra:
   recipe-maintainers:
