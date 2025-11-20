@@ -1,54 +1,70 @@
 {% set name = "paramiko" %}
-{% set version = "3.5.0" %}
+{% set version = "4.0.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ad11e540da4f55cedda52931f1a3f812a8238a7af7f62a60de538cd80bb28124
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 6a25f07b380cc9c9a88d2b920ad37167ac4667f8d9886ccebd8f90f654b5d69f
+  patches:
+    - patches/remove-icecream-dep-conftest.patch
 
 build:
-  skip: True  # [py<36]
-  number: 1
+  skip: true  # [py<39]
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv --no-build-isolation
 
 requirements:
   host:
     - python
     - pip
-    - setuptools
-    - wheel
+    - setuptools >=77
   run:
     - python
     - bcrypt >=3.2
     - cryptography >=3.3
+    - invoke >=2.0
     - pynacl >=1.5
   run_constrained:
     - pyasn1 >=0.1.7
-    - gssapi >=1.4.1   # [not win]
+    - gssapi >=1.4.1  # [not win]
     - pywin32 >=218  # [win]
-    - invoke >=2.0
+
+# E   ModuleNotFoundError: No module named 'pytest_relaxed'
+{% set ignore_tests = " --ignore=tests/test_client.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_ssh_gss.py" %}
+# Using pytest.skip outside of a test will skip the entire module. If that's your intention, pass `allow_module_level=True`
+{% set ignore_tests = ignore_tests + " --ignore=tests/test_sftp.py" %}  # [win]
+{% set deselect_tests = "" %}
+# E           AssertionError: assert 438 == 384
+{% set deselect_tests = " --deselect=tests/test_pkey.py::KeyTest::test_new_keyfiles_avoid_descriptor_race_integration" %}  # [win]
 
 test:
+  source_files:
+    - tests
   imports:
     - paramiko
   requires:
     - pip
+    - pytest
+    - invoke
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -v tests {{ ignore_tests }} {{ deselect_tests }}
 
 about:
-  home: https://www.paramiko.org/
+  home: https://www.paramiko.org
   license_file: LICENSE
   license: LGPL-2.1-or-later
   summary: SSH2 protocol library
   description: |
     A Python implementation of SSHv2
   license_family: LGPL
-  dev_url: https://github.com/paramiko/paramiko/
-  doc_url: https://docs.paramiko.org/
+  dev_url: https://github.com/paramiko/paramiko
+  doc_url: https://docs.paramiko.org
 
 extra:
   recipe-maintainers:
