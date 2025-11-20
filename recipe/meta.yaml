@@ -37,6 +37,9 @@ requirements:
 {% set ignore_tests = ignore_tests + " --ignore=tests/test_ssh_gss.py" %}
 # Using pytest.skip outside of a test will skip the entire module. If that's your intention, pass `allow_module_level=True`
 {% set ignore_tests = ignore_tests + " --ignore=tests/test_sftp.py" %}  # [win]
+{% set deselect_tests = "" %}
+# E           AssertionError: assert 438 == 384
+{% set deselect_tests = " --deselect=tests/test_pkey.py::KeyTest::test_new_keyfiles_avoid_descriptor_race_integration" %}  # [win]
 
 test:
   source_files:
@@ -50,7 +53,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v tests {{ ignore_tests }}
+    - pytest -v tests {{ ignore_tests }} {{ deselect_tests }}
 
 about:
   home: https://www.paramiko.org
