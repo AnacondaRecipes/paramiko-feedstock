@@ -1,0 +1,38 @@
+From 21c1643ae3fdf52601e4e85fb916f5630162f116 Mon Sep 17 00:00:00 2001
+From: Andrii Vetroumov <avetroumov@anaconda.com>
+Date: Tue, 4 Aug 2026 10:01:59 +0300
+Subject: [PATCH] remove icecream dep conftest
+
+---
+ tests/conftest.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/tests/conftest.py b/tests/conftest.py
+index 4e9ae8a5..c118ff89 100644
+--- a/tests/conftest.py
++++ b/tests/conftest.py
+@@ -5,8 +5,8 @@ import threading
+ from pathlib import Path
+ 
+ import pytest
+-from icecream import ic
+-from icecream import install as install_ic
++# from icecream import ic
++# from icecream import install as install_ic
+ from invoke.vendor.lexicon import Lexicon
+ 
+ from paramiko import (
+@@ -24,8 +24,8 @@ from ._stub_sftp import StubServer, StubSFTPServer
+ from ._util import _support
+ 
+ # Better print() for debugging - use ic()!
+-install_ic()
+-ic.configureOutput(includeContext=True)
++# install_ic()
++# ic.configureOutput(includeContext=True)
+ 
+ 
+ # Perform logging by default; pytest will capture and thus hide it normally,
+-- 
+2.54.0
+
