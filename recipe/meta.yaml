@@ -1,5 +1,5 @@
 {% set name = "paramiko" %}
-{% set version = "4.0.0" %}
+{% set version = "5.0.0" %}
 
 package:
   name: {{ name }}
@@ -7,9 +7,9 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 6a25f07b380cc9c9a88d2b920ad37167ac4667f8d9886ccebd8f90f654b5d69f
+  sha256: 36763b5b95c2a0dcfdf1abc48e48156ee425b21efe2f0e787c2dd5a95c0e5e79
   patches:
-    - patches/remove-icecream-dep-conftest.patch
+    - patches/0001-remove-icecream-dep-conftest.patch
 
 build:
   skip: true  # [py<39]
@@ -27,10 +27,6 @@ requirements:
     - cryptography >=3.3
     - invoke >=2.0
     - pynacl >=1.5
-  run_constrained:
-    - pyasn1 >=0.1.7
-    - gssapi >=1.4.1  # [not win]
-    - pywin32 >=218  # [win]
 
 # E   ModuleNotFoundError: No module named 'pytest_relaxed'
 {% set ignore_tests = " --ignore=tests/test_client.py" %}
@@ -60,9 +56,9 @@ about:
   license_file: LICENSE
   license: LGPL-2.1-or-later
   summary: SSH2 protocol library
+  license_family: LGPL
   description: |
     A Python implementation of SSHv2
-  license_family: LGPL
   dev_url: https://github.com/paramiko/paramiko
   doc_url: https://docs.paramiko.org
 
