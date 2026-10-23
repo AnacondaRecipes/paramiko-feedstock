@@ -1,5 +1,5 @@
 {% set name = "paramiko" %}
-{% set version = "5.0.0" %}
+{% set version = "5.1.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 36763b5b95c2a0dcfdf1abc48e48156ee425b21efe2f0e787c2dd5a95c0e5e79
+  sha256: 239b5f9b2a53006cd54f83cf8495ee742083708ead947882c8dd2786de79f39b
   patches:
     - patches/0001-remove-icecream-dep-conftest.patch
 
